@@ -1,18 +1,3 @@
-/*
- * Copyright 2013-2014 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package example.springdata.jpa.custom;
 
 import java.util.List;
@@ -22,8 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
- * Implementation fo the custom repository functionality declared in {@link UserRepositoryCustom} based on JPA. To use
- * this implementation in combination with Spring Data JPA you can either register it programatically:
+ * 实现自定义repository {@link UserRepositoryCustom}给予JPA声明的功能. To use
+ * 与Spring Data JPA联合使用自定义实现，你需要编程注册:
  * 
  * <pre>
  * EntityManager em = ... // Obtain EntityManager
@@ -44,8 +29,6 @@ import javax.persistence.criteria.CriteriaQuery;
  * 
  * If you need to manually configure the custom instance see {@link UserRepositoryImplJdbc} for an example.
  * 
- * @author Oliver Gierke
- * @author Thomas Darimont
  */
 class UserRepositoryImpl implements UserRepositoryCustom {
 
@@ -61,7 +44,6 @@ class UserRepositoryImpl implements UserRepositoryCustom {
 	}
 
 	/*
-	 * (non-Javadoc)
 	 * @see example.springdata.jpa.UserRepositoryCustom#myCustomBatchOperation()
 	 */
 	public List<User> myCustomBatchOperation() {
