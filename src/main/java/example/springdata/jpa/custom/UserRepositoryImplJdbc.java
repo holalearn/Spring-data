@@ -1,18 +1,3 @@
-/*
- * Copyright 2013-2015 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package example.springdata.jpa.custom;
 
 import java.sql.ResultSet;
@@ -28,25 +13,18 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 
 /**
- * Class with the implementation of the custom repository code. Uses JDBC in this case. For basic programatic setup see
- * {@link UserRepositoryImpl} for examples.
- * <p>
- * As you need to hand the instance a {@link javax.sql.DataSource} or
- * {@link org.springframework.jdbc.core.simple.SimpleJdbcTemplate} you manually need to declare it as Spring bean:
+ * 自定义repository的实现代码. 本实例使用JDBC. 更基本的自定义可以查看{@link UserRepositoryImpl}.
+ * 如果你需要处理{@link javax.sql.DataSource}或
+ * {@link org.springframework.jdbc.core.simple.SimpleJdbcTemplate}，你需要手动将其声明为Spring bean:
  * 
- * <pre>
- * &lt;jpa:repository base-package=&quot;com.acme.repository&quot; /&gt;
+ * <jpa:repository base-package="com.acme.repository" />
+ * <bean id="userRepositoryImpl" class="...UserRepositoryJdbcImpl">
+ * 	<property name="dataSource" ref="dataSource" />
+ * </bean>
  * 
- * &lt;bean id=&quot;userRepositoryImpl&quot; class=&quot;...UserRepositoryJdbcImpl&quot;&gt;
- *   &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
- * &lt;/bean&gt;
- * </pre>
- * 
- * Using {@code userRepositoryImpl} will cause the repository instance get this bean injected for custom repository
+ * 使用{@code userRepositoryImpl} will cause the repository instance get this bean injected for custom repository
  * logic as the default postfix for custom DAO instances is {@code Impl}.
  * 
- * @author Oliver Gierke
- * @author Thomas Darimont
  */
 @Profile("jdbc")
 @Component("userRepositoryImpl")
