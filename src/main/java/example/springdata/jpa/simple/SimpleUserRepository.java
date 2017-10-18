@@ -53,8 +53,8 @@ public interface SimpleUserRepository extends CrudRepository<User, Long> {
 	List<User> findByFirstname(String firstname);
 
 	/**
-	 * Returns all users with the given name as first- or lastname. This makes the query to method relation much more
-	 * refactoring-safe as the order of the method parameters is completely irrelevant.
+	 * Query
+	 * 该方法转换为{@link Query}注解声明的查询语句.
 	 * 
 	 * @param name
 	 * @return
@@ -63,7 +63,8 @@ public interface SimpleUserRepository extends CrudRepository<User, Long> {
 	List<User> findByFirstnameOrLastname(String name);
 
 	/**
-	 * Returns the total number of entries deleted as their lastnames match the given one.
+	 * remove
+	 * 返回删除记录的总数
 	 * 
 	 * @param lastname
 	 * @return
@@ -71,8 +72,8 @@ public interface SimpleUserRepository extends CrudRepository<User, Long> {
 	Long removeByLastname(String lastname);
 
 	/**
-	 * Returns a {@link Slice} counting a maximum number of {@link Pageable#getPageSize()} users matching given criteria
-	 * starting at {@link Pageable#getOffset()} without prior count of the total number of elements available.
+	 * Pageable
+	 * 返回符合给定条件的最大页{@link Pageable#getPageSize()}的切片{@link Slice}
 	 * 
 	 * @param lastname
 	 * @param page
@@ -81,23 +82,15 @@ public interface SimpleUserRepository extends CrudRepository<User, Long> {
 	Slice<User> findByLastnameOrderByUsernameAsc(String lastname, Pageable page);
 
 	/**
-	 * Return the first 2 users ordered by their lastname asc.
-	 * 
-	 * <pre>
-	 * Example for findFirstK / findTopK functionality.
-	 * </pre>
+	 * FirstK / TopK
 	 * 
 	 * @return
 	 */
 	List<User> findFirst2ByOrderByLastnameAsc();
 
 	/**
-	 * Return the first 2 users ordered by the given {@code sort} definition.
-	 * 
-	 * <pre>
-	 * This variant is very flexible because one can ask for the first K results when a ASC ordering
-	 * is used as well as for the last K results when a DESC ordering is used.
-	 * </pre>
+	 * Sort & TopK
+	 * 返回根据{@code sort}排序后的前2个user
 	 * 
 	 * @param sort
 	 * @return
@@ -105,7 +98,8 @@ public interface SimpleUserRepository extends CrudRepository<User, Long> {
 	List<User> findTop2By(Sort sort);
 
 	/**
-	 * Return all the users with the given firstname or lastname. Makes use of SpEL (Spring Expression Language).
+	 * SpEL
+	 * 使用SpEL (Spring Expression Language).
 	 *
 	 * @param user
 	 * @return
