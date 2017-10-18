@@ -12,26 +12,18 @@ public interface UserRepository extends CrudRepository<User, Long>, UserReposito
 	/**
 	 * 使用NamedQuery
 	 * 通过指定username查找User. 这个方法会转换为使用{@link User}类中注解{@link javax.persistence.NamedQuery}的查询语句
-	 * 
-	 * @param username
-	 * @return
 	 */
 	User findByTheUsersName(String username);
 
 	/**
 	 * 通过指定lastname查找所有User. 这个方法将直接根据方法名称转换，没有其他查询语句声明
-	 * 
-	 * @param lastname
-	 * @return
 	 */
 	List<User> findByLastname(String lastname);
 
 	/**
 	 * 通过指定firstname查找所有User. 这个方法将根据{@link Query}注解声明的查询转换查询语句
-	 * 
-	 * @param firstname
-	 * @return
 	 */
 	@Query("select u from User u where u.firstname = :firstname")
 	List<User> findByFirstname(String firstname);
+	
 }
