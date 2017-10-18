@@ -22,8 +22,7 @@ import org.springframework.stereotype.Component;
  * 	<property name="dataSource" ref="dataSource" />
  * </bean>
  * 
- * 使用{@code userRepositoryImpl} will cause the repository instance get this bean injected for custom repository
- * logic as the default postfix for custom DAO instances is {@code Impl}.
+ * 使用{@code userRepositoryImpl}，因为自定义repository的实现类以{@code Impl}为后缀
  * 
  */
 @Profile("jdbc")
