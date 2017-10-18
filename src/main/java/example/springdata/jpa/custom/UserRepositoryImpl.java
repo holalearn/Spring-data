@@ -33,8 +33,6 @@ class UserRepositoryImpl implements UserRepositoryCustom {
 
 	/**
 	 * 配置entity manager
-	 * 
-	 * @param em the {@link EntityManager} to set.
 	 */
 	public void setEntityManager(EntityManager em) {
 		this.em = em;
