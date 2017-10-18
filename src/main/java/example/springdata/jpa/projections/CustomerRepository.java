@@ -1,18 +1,3 @@
-/*
- * Copyright 2015-2016 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package example.springdata.jpa.projections;
 
 import java.util.Collection;
@@ -30,87 +15,54 @@ import org.springframework.data.repository.CrudRepository;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 	/**
-	 * Uses a projection interface to indicate the fields to be returned. As the projection doesn't use any dynamic
-	 * fields, the query execution will be restricted to only the fields needed by the projection.
-	 * 
-	 * @return
+	 * interface投影：接口方法指定返回字段.
 	 */
 	Collection<CustomerProjection> findAllProjectedBy();
 
 	/**
-	 * When a projection is used that contains dynamic properties (i.e. SpEL expressions in an {@link Value} annotation),
-	 * the normal target entity will be loaded but dynamically projected so that the target can be referred to in the
-	 * expression.
-	 * 
-	 * @return
+	 * 动态属性投影：如：{@link Value}注解内的SpEL表达式,会加载正常的target entity然后再动态投影，以方便表达式对于target的引用
 	 */
 	Collection<CustomerSummary> findAllSummarizedBy();
 
 	/**
-	 * Projection interfaces can be used with manually declared queries, too. Make sure you alias the projects matching
-	 * the projection fields.
-	 * 
-	 * @return
+	 * interface投影 & 手动声明查询 ： 需要保证使用别名与投影字段匹配
 	 */
 	@Query("select c.firstname as firstname, c.lastname as lastname from Customer c")
 	Collection<CustomerProjection> findsByProjectedColumns();
 
 	/**
-	 * Uses a concrete DTO type to indicate the fields to be returned. This gets translated into a constructor expression
-	 * in the query.
-	 * 
-	 * @return
+	 * DTO投影：使用具体的DTO类型来指定返回字段. 这个将转换为查询语句中的构造函数表达式
 	 */
 	Collection<CustomerDto> findAllDtoedBy();
-
+	
 	/**
-	 * Passes in the projection type dynamically (either interface or DTO).
-	 * 
-	 * @param firstname
-	 * @param projection
-	 * @return
-	 */
-	<T> Collection<T> findByFirstname(String firstname, Class<T> projection);
-
-	/**
-	 * Projection for a single entity.
-	 * 
-	 * @param id
-	 * @return
-	 */
-	CustomerProjection findProjectedById(Long id);
-
-	/**
-	 * Dynamic projection for a single entity.
-	 * 
-	 * @param id
-	 * @param projection
-	 * @return
-	 */
-	<T> T findProjectedById(Long id, Class<T> projection);
-
-	/**
-	 * Projections used with pagination.
-	 * 
-	 * @param pageable
-	 * @return
-	 */
-	Page<CustomerProjection> findPagedProjectedBy(Pageable pageable);
-
-	/**
-	 * A DTO projection using a constructor expression in a manually declared query.
-	 * 
-	 * @param firstname
-	 * @return
+	 * DTO投影：在声明的查询语句中使用构造器表达式
 	 */
 	@Query("select new example.springdata.jpa.projections.CustomerDto(c.firstname) from Customer c where c.firstname = ?1")
 	Collection<CustomerDto> findDtoWithConstructorExpression(String firstname);
 
 	/**
-	 * A projection wrapped into an {@link Optional}.
-	 * 
-	 * @param lastname
-	 * @return
+	 * 动态类型投影：(interface或DTO).
+	 */
+	<T> Collection<T> findByFirstname(String firstname, Class<T> projection);
+
+	/**
+	 * 单个记录的投影.
+	 */
+	CustomerProjection findProjectedById(Long id);
+
+	/**
+	 * 动态投影单个记录.
+	 */
+	<T> T findProjectedById(Long id, Class<T> projection);
+
+	/**
+	 * 翻页 & 投影
+	 */
+	Page<CustomerProjection> findPagedProjectedBy(Pageable pageable);
+
+	/**
+	 * Optional & 投影
 	 */
 	Optional<CustomerProjection> findOptionalProjectionByLastname(String lastname);
 }
