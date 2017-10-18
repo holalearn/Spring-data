@@ -7,27 +7,22 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
- * 实现自定义repository {@link UserRepositoryCustom}给予JPA声明的功能. To use
- * 与Spring Data JPA联合使用自定义实现，你需要编程注册:
+ * 实现自定义repository {@link UserRepositoryCustom}声明的功能. 
  * 
- * <pre>
- * EntityManager em = ... // Obtain EntityManager
+ * EntityManager em = ... // 获取 EntityManager
  * 
  * UserRepositoryCustom custom = new UserRepositoryImpl();
  * custom.setEntityManager(em);
  * 
+ * // Factory为给定的repository接口创建代理实例.
  * RepositoryFactorySupport factory = new JpaRepositoryFactory(em);
+ * // 通过自定义实现创建代理类
  * UserRepository repository = factory.getRepository(UserRepository.class, custom);
- * </pre>
  * 
- * Using the Spring namespace the implementation will just get picked up due to the classpath scanning for
- * implementations with the {@code Impl} postfix.
+ * 使用Spring的namespace，实现类只需放在扫描路径上，后缀为{@code Impl}
+ * <jpa:repositories base-package="com.acme.repository" />
  * 
- * <pre>
- * &lt;jpa:repositories base-package=&quot;com.acme.repository&quot; /&gt;
- * </pre>
- * 
- * If you need to manually configure the custom instance see {@link UserRepositoryImplJdbc} for an example.
+ * 如果需要手动配置自定义接口，查看{@link UserRepositoryImplJdbc}示例
  * 
  */
 class UserRepositoryImpl implements UserRepositoryCustom {
@@ -35,7 +30,7 @@ class UserRepositoryImpl implements UserRepositoryCustom {
 	@PersistenceContext private EntityManager em;
 
 	/**
-	 * Configure the entity manager to be used.
+	 * 配置entity manager
 	 * 
 	 * @param em the {@link EntityManager} to set.
 	 */
