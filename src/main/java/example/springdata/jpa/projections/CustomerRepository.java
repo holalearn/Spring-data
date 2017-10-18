@@ -23,17 +23,14 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	Collection<CustomerProjection> findAllProjectedBy();
 
 	/**
-	 * When a projection is used that contains dynamic properties (i.e. SpEL expressions in an {@link Value} annotation),
-	 * the normal target entity will be loaded but dynamically projected so that the target can be referred to in the
-	 * expression.
+	 * 如果投影包含动态属性(i.e.  {@link Value}注解内的SpEL表达式),会加载正常的target entity然后再动态投影，以方便表达式对于target的引用
 	 * 
 	 * @return
 	 */
 	Collection<CustomerSummary> findAllSummarizedBy();
 
 	/**
-	 * Projection interfaces can be used with manually declared queries, too. Make sure you alias the projects matching
-	 * the projection fields.
+	 * 投影接口也可以和手动声明的查询语句一起使用. 需要保证使用别名与投影字段匹配
 	 * 
 	 * @return
 	 */
@@ -41,7 +38,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	Collection<CustomerProjection> findsByProjectedColumns();
 
 	/**
-	 * Uses a concrete DTO type to indicate the fields to be returned. This gets translated into a constructor expression
+	 * 使用具体的DTO类型来指定返回字段. This gets translated into a constructor expression
 	 * in the query.
 	 * 
 	 * @return
@@ -49,7 +46,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	Collection<CustomerDto> findAllDtoedBy();
 
 	/**
-	 * Passes in the projection type dynamically (either interface or DTO).
+	 * 动态传入投影类型(interface或DTO).
 	 * 
 	 * @param firstname
 	 * @param projection
@@ -58,7 +55,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	<T> Collection<T> findByFirstname(String firstname, Class<T> projection);
 
 	/**
-	 * Projection for a single entity.
+	 * 单个记录的投影.
 	 * 
 	 * @param id
 	 * @return
@@ -66,7 +63,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	CustomerProjection findProjectedById(Long id);
 
 	/**
-	 * Dynamic projection for a single entity.
+	 * 动态投影单个记录.
 	 * 
 	 * @param id
 	 * @param projection
@@ -75,7 +72,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	<T> T findProjectedById(Long id, Class<T> projection);
 
 	/**
-	 * Projections used with pagination.
+	 * 翻页 & 投影
 	 * 
 	 * @param pageable
 	 * @return
@@ -92,7 +89,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	Collection<CustomerDto> findDtoWithConstructorExpression(String firstname);
 
 	/**
-	 * A projection wrapped into an {@link Optional}.
+	 * Optional & 投影
 	 * 
 	 * @param lastname
 	 * @return
