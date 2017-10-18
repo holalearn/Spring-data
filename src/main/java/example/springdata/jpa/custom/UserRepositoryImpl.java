@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 /**
  * 实现自定义repository {@link UserRepositoryCustom}声明的功能. 
  * 
+ * 也可以手动注册使用Spring Data JPA
  * EntityManager em = ... // 获取 EntityManager
  * 
  * UserRepositoryCustom custom = new UserRepositoryImpl();
@@ -27,6 +28,7 @@ import javax.persistence.criteria.CriteriaQuery;
  */
 class UserRepositoryImpl implements UserRepositoryCustom {
 
+	// @PersistenceContext允许指定使用哪个持久化单元。一个项目可能有多个数据源，连接到不同的数据库，@PersistenceContext允许指定数据源
 	@PersistenceContext private EntityManager em;
 
 	/**
