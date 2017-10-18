@@ -15,7 +15,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 	/**
-	 * Uses a projection interface to indicate the fields to be returned. As the projection doesn't use any dynamic
+	 * 使用投影接口指定返回字段. 因为投影不使用任何动态字段， doesn't use any dynamic
 	 * fields, the query execution will be restricted to only the fields needed by the projection.
 	 * 
 	 * @return
