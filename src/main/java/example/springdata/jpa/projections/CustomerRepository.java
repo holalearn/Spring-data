@@ -31,7 +31,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	 * DTO投影：使用具体的DTO类型来指定返回字段. 这个将转换为查询语句中的构造函数表达式
 	 */
 	Collection<CustomerDto> findAllDtoedBy();
-	
+
 	/**
 	 * DTO投影：在声明的查询语句中使用构造器表达式
 	 */
@@ -48,18 +48,12 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	 */
 	CustomerProjection findProjectedById(Long id);
 
-	/**
-	 * 动态投影单个记录.
-	 */
+	// 动态投影单个记录.
 	<T> T findProjectedById(Long id, Class<T> projection);
 
-	/**
-	 * 翻页 & 投影
-	 */
+	// 翻页 & 投影
 	Page<CustomerProjection> findPagedProjectedBy(Pageable pageable);
 
-	/**
-	 * Optional & 投影
-	 */
+	// Optional & 投影
 	Optional<CustomerProjection> findOptionalProjectionByLastname(String lastname);
 }
